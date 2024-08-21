@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+    public bool isMoving;
+
     public float moveSpeed;
 
     public float groundDrag;
@@ -18,10 +20,13 @@ public class PlayerController : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
+    public float playerHeight;
+
     public bool grounded;
+    public LayerMask whatIsGround;
 
     public Transform orientation;
-
+    public Transform mainCamera;
     private float horizontalInput;
     private float verticalInput;
 
@@ -32,11 +37,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.transform.rotation = mainCamera.transform.rotation;
     }
 
     private void Update()
     {
+        // grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
         MyInput();
         SpeedControl();
 
