@@ -29,6 +29,15 @@ public class AnimationController : MonoBehaviour
             {
                 animator.SetBool("OnGround", false);
             }
+
+            if (pc.isMoving)
+            {
+                animator.SetBool("Moving", true);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
+            }
         }
     }
 }

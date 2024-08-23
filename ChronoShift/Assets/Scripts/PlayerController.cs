@@ -38,18 +38,23 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        rb.transform.rotation = mainCamera.transform.rotation;
     }
 
     private void Update()
     {
-        // grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
         MyInput();
         SpeedControl();
 
-        if (grounded == true)
+        if (grounded)
         {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
             rb.drag = groundDrag;
         }
         else
