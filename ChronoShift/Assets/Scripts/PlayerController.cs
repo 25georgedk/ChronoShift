@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("whatIsGround"))
         {
             grounded = true;
         }
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("whatIsGround"))
         {
             grounded = false;
         }
